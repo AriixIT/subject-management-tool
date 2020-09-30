@@ -23,12 +23,12 @@ public class Semester {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "semester", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "semester", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Subject> subjects;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="user_id", referencedColumnName = "id", nullable=false)
     private User user;
 
     public Semester() {}

@@ -2,7 +2,7 @@ package notenverwaltung.notenverwaltung.domain.semester;
 
 import java.util.List;
 
-public interface SemesterService {
+public interface SemesterService{
 
     List<Semester> getAllSemester();
 

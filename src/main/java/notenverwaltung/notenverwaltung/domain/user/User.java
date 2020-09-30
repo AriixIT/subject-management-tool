@@ -1,11 +1,14 @@
 package notenverwaltung.notenverwaltung.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import notenverwaltung.notenverwaltung.domain.role.Role;
 import notenverwaltung.notenverwaltung.domain.semester.Semester;
 import org.hibernate.annotations.*;
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -34,9 +37,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Semester> semesters;
+
+    @ManyToMany
+    private Set<Role> roles;
 
     public User() {}
 
@@ -89,6 +95,7 @@ public class User {
         this.lastname = lastname;
     }
 
+
     public String getPassword() {
         return password;
     }
@@ -103,5 +110,13 @@ public class User {
 
     public void setSemesters(Set<Semester> semesters) {
         this.semesters = semesters;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

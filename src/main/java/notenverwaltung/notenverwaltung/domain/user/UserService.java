@@ -10,4 +10,7 @@ public interface UserService {
 
     User createUser(User user);
 
+    String deleteUserById(String id);
+
+
 }

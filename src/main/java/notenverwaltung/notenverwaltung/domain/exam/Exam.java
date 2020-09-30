@@ -72,4 +72,12 @@ public class Exam {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 }

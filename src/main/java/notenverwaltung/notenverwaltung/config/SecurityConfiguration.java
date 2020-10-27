@@ -20,42 +20,24 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Qualifier("dataSource")
-    @Autowired
-    private DataSource dataSource;
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .and()
+                .httpBasic();
+    }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers("/users/**", "/h2-console/**", "/login/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin();
-
-        httpSecurity.csrf()
-                .ignoringAntMatchers("/users/**", "/h2-console/**", "/login/**");
-        httpSecurity.headers()
-                .frameOptions()
-                .sameOrigin();
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user")
+                .password("{noop}pass") // Spring Security 5 requires specifying the password storage format
+                .roles("USER");
     }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .usersByUsernameQuery(
-                        "SELECT username, password, enabled FROM users WHERE username=?")
-                .authoritiesByUsernameQuery(
-                        "SELECT username, 'ROLE_USER' FROM users WHERE username=?");
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 }
 
 

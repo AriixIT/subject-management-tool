@@ -1,18 +1,18 @@
-package notenverwaltung.notenverwaltung.domain.role;
+package notenverwaltung.notenverwaltung.domain.authority;
 
-import notenverwaltung.notenverwaltung.domain.authority.Authority;
+import notenverwaltung.notenverwaltung.domain.role.Role;
 import notenverwaltung.notenverwaltung.domain.user.User;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "role")
-public class Role {
+@Table(name = "authorities")
+public class Authority {
+
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -20,19 +20,17 @@ public class Role {
     @Column(name = "id")
     private String id;
 
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    private Set<Authority> authorities;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @ManyToMany(mappedBy = "authorities")
+    private Set<Role> roles;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String  id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,19 +42,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
+    public Set<Role> getRoles() {
+        return roles;
     }
 }

@@ -15,6 +15,8 @@ public class SubjectDTO {
 
     protected String name;
 
+    protected float average;
+
     protected Set<ExamDTO> exams;
 
     public String getId() {
@@ -31,6 +33,14 @@ public class SubjectDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getAverage() {
+        return average;
+    }
+
+    public void setAverage(float average) {
+        this.average = average;
     }
 
     public Set<ExamDTO> getExams() {

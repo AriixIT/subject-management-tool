@@ -24,6 +24,9 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "average")
+    private float average;
+
     @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Exam> exams;
@@ -35,8 +38,9 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(String name, Set<Exam> exams, Semester semester) {
+    public Subject(String name, float average, Set<Exam> exams, Semester semester) {
         this.name = name;
+        this.average = average;
         this.exams = exams;
         this.semester = semester;
     }
@@ -55,6 +59,14 @@ public class Subject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getAverage() {
+        return average;
+    }
+
+    public void setAverage(float average) {
+        this.average = average;
     }
 
     public Set<Exam> getExams() {

@@ -12,7 +12,7 @@ public class ExamDTO {
 
     protected String name;
 
-    protected LocalDate date;
+    protected String date;
 
     protected float mark;
 
@@ -32,11 +32,11 @@ public class ExamDTO {
         this.name = name;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

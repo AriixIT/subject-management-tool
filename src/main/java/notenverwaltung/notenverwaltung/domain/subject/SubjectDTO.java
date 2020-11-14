@@ -17,8 +17,6 @@ public class SubjectDTO {
 
     protected float average;
 
-    protected Set<ExamDTO> exams;
-
     public String getId() {
         return id;
     }
@@ -43,14 +41,18 @@ public class SubjectDTO {
         this.average = average;
     }
 
-    public Set<ExamDTO> getExams() {
-        return exams;
-    }
 
-    public void setExams(Set<ExamDTO> exams) {
-        this.exams = exams;
-    }
+    public static class WithExams extends SubjectDTO {
+        protected Set<ExamDTO> exams;
 
+        public Set<ExamDTO> getExams() {
+            return exams;
+        }
+
+        public void setExams(Set<ExamDTO> exams) {
+            this.exams = exams;
+        }
+    }
 
     public static class WithSemester extends SubjectDTO {
 

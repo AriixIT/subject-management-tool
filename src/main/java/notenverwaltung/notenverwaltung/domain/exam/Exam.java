@@ -25,7 +25,7 @@ public class Exam {
     private float mark;
 
     @Column(name = "date")
-    private LocalDate date;
+    private String date;
 
     @ManyToOne
     @JoinColumn(name="subject", nullable=false)
@@ -34,7 +34,7 @@ public class Exam {
     public Exam() {
     }
 
-    public Exam(String name, float mark, LocalDate date, Subject subject) {
+    public Exam(String name, float mark, String date, Subject subject) {
         this.name = name;
         this.mark = mark;
         this.date = date;
@@ -65,11 +65,11 @@ public class Exam {
         this.mark = mark;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

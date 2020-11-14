@@ -14,11 +14,15 @@ public interface SemesterMapper {
 
     Semester fromWithUserDTO(SemesterDTO.WithUser dto);
 
+    Semester fromWithSubjectsDTO(SemesterDTO.WithSubjects dto);
+
+    SemesterDTO.WithSubjects toWithSubjectsDTO(Semester semester);
+
     Semester fromDTO(SemesterDTO dto);
 
     Collection<Semester> fromDTOs(Collection<SemesterDTO> semesterDTOS);
 
-    @Named(value = "toSemesterDTO")
+    @Named(value = "toSemesterDTOs")
     SemesterDTO toDTO(Semester semester);
 
     @IterableMapping(qualifiedByName = "toSemesterDTOs")

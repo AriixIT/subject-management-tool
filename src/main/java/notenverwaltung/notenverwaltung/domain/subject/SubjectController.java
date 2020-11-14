@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/subjects")
 public class SubjectController {
     private SubjectService subjectService;
@@ -30,19 +31,20 @@ public class SubjectController {
     @GetMapping({"/{id}", "/{id}/"})
     public ResponseEntity<SubjectDTO> getSubjectById(@PathVariable String id) {
         Subject subject = subjectService.getSubjectById(id);
-        return new ResponseEntity<>(subjectMapper.toDTO(subject), HttpStatus.OK);
+        return new ResponseEntity<>(subjectMapper.toWithExamsDTO(subject), HttpStatus.OK);
     }
 
     @PostMapping({"", "/"})
     public ResponseEntity<SubjectDTO> createSubject(@RequestBody SubjectDTO.WithSemester subjectDTO) {
-        subjectService.createSubject(subjectMapper.fromWithSemesterDTO(subjectDTO));
-        return new ResponseEntity<>(subjectDTO, HttpStatus.CREATED);
+        Subject sub = subjectMapper.fromWithSemesterDTO(subjectDTO);
+        subjectService.createSubject(sub);
+        return new ResponseEntity<>(subjectMapper.toWithExamsDTO(sub), HttpStatus.CREATED);
     }
 
     @PutMapping({"/{id}", "/{id}/"})
     public ResponseEntity<SubjectDTO> updateSubjectById(@PathVariable String id, @RequestBody SubjectDTO subjectDTO) {
         Subject newSubject = subjectService.updateSubjectById(id, subjectMapper.fromDTO(subjectDTO));
-        return new ResponseEntity<>(subjectMapper.toDTO(newSubject), HttpStatus.OK);
+        return new ResponseEntity<>(subjectMapper.toWithExamsDTO(newSubject), HttpStatus.OK);
     }
 
     @DeleteMapping({"/{id}", "/{id}/"})

@@ -27,7 +27,7 @@ public class ExamServiceImpl implements ExamService {
 
     @Override
     public Exam getExamById(String id) {
-        return getExamById(id);
+        return findById(id);
     }
 
     @Override

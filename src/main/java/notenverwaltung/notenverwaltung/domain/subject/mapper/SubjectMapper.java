@@ -14,12 +14,14 @@ public interface SubjectMapper {
 
     Subject fromWithSemesterDTO(SubjectDTO.WithSemester dto);
 
+    SubjectDTO.WithExams toWithExamsDTO(Subject subject);
+
     Subject fromDTO(SubjectDTO dto);
 
     Collection<Subject> fromDTOs(Collection<SubjectDTO> subjectDTOS);
 
-    @Named(value = "toSubjectDTO")
-    SubjectDTO toDTO(Subject user);
+    @Named(value = "toSubjectDTOs")
+    SubjectDTO toDTO(Subject subject);
 
     @IterableMapping(qualifiedByName = "toSubjectDTOs")
     Collection<SubjectDTO> toDTOs(Collection<Subject> subjects);

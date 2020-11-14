@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/semesters")
 public class SemesterController {
 
@@ -31,19 +32,20 @@ public class SemesterController {
     @GetMapping({"/{id}", "/{id}/"})
     public ResponseEntity<SemesterDTO> getSemesterById(@PathVariable String id) {
         Semester semester = semesterService.getSemesterById(id);
-        return new ResponseEntity<>(semesterMapper.toDTO(semester), HttpStatus.OK);
+        return new ResponseEntity<>(semesterMapper.toWithSubjectsDTO(semester), HttpStatus.OK);
     }
 
     @PostMapping({"", "/"})
     public ResponseEntity<SemesterDTO> createSemester(@RequestBody SemesterDTO.WithUser semester) {
-        semesterService.createSemester(semesterMapper.fromWithUserDTO(semester));
-        return new ResponseEntity<>(semester, HttpStatus.CREATED);
+        Semester sem = semesterMapper.fromWithUserDTO(semester);
+        semesterService.createSemester(sem);
+        return new ResponseEntity<>(semesterMapper.toWithSubjectsDTO(sem), HttpStatus.CREATED);
     }
 
     @PutMapping({"/{id}", "/{id}/"})
     public ResponseEntity<SemesterDTO> updateSemesterById(@PathVariable String id, @RequestBody SemesterDTO semester) {
         Semester newSemester = semesterService.updateSemesterById(id, semesterMapper.fromDTO(semester));
-        return new ResponseEntity<>(semesterMapper.toDTO(newSemester), HttpStatus.OK);
+        return new ResponseEntity<>(semesterMapper.toWithSubjectsDTO(newSemester), HttpStatus.OK);
     }
 
     @DeleteMapping({"/{id}", "/{id}/"})

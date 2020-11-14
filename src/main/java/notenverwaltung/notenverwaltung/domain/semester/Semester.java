@@ -23,7 +23,7 @@ public class Semester {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "semester", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "semester", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Set<Subject> subjects;
 

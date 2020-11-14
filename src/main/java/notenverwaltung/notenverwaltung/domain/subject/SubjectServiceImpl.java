@@ -41,12 +41,11 @@ public class SubjectServiceImpl implements SubjectService {
     public Subject updateSubjectById(String id, Subject subject) {
         Subject oldSubject = findById(id);
 
-        oldSubject.setExams(subject.getExams());
         oldSubject.setName(subject.getName());
 
         subjectRepository.save(oldSubject);
 
-        return subject;
+        return oldSubject;
     }
 
     @Override

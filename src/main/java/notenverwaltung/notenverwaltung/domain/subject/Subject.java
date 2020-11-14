@@ -27,7 +27,7 @@ public class Subject {
     @Column(name = "average")
     private float average;
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Set<Exam> exams;
 

@@ -41,7 +41,6 @@ public class SemesterServiceImpl implements SemesterService {
         Semester oldSemester = findById(id);
 
         oldSemester.setName(semester.getName());
-        oldSemester.setSubjects(semester.getSubjects());
 
         semesterRepository.save(oldSemester);
 
